@@ -26,11 +26,14 @@ const getOpenAIAPIResponse = async (chatHistory) => {
         throw err;
       }
 
-      // Wait before retrying
-      await new Promise((resolve) => setTimeout(resolve, 2000 * attempt));
+      const delay =
+        Math.pow(2, attempt) * 1000 + Math.random() * 1000;
+
+      console.log(`Retrying in ${Math.round(delay)}ms...`);
+
+      await new Promise((resolve) => setTimeout(resolve, delay));
     }
   }
 };
 
 export default getOpenAIAPIResponse;
-
