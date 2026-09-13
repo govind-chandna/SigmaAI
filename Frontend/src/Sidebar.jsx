@@ -21,7 +21,7 @@ function Sidebar() {
     try {
       const token = localStorage.getItem("token");
 
-      const response = await fetch("https://sigmaai-backend.onrender.com/api/thread", {
+      const response = await fetch("https://sigmaai-0qcu.onrender.com/api/thread", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -57,7 +57,7 @@ function Sidebar() {
       const token = localStorage.getItem("token");
 
       const response = await fetch(
-        `https://sigmaai-backend.onrender.com/api/thread/${newThreadId}`,
+        `https://sigmaai-0qcu.onrender.com/api/thread/${newThreadId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -79,7 +79,7 @@ function Sidebar() {
       const token = localStorage.getItem("token");
 
       const response = await fetch(
-        `https://sigmaai-backend.onrender.com/api/thread/${threadId}`,
+        `https://sigmaai-0qcu.onrender.com/api/thread/${threadId}`,
         {
           method: "DELETE",
           headers: {

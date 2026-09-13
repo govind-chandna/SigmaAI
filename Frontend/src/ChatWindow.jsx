@@ -42,7 +42,7 @@ function ChatWindow() {
     };
 
     try {
-      const response = await fetch("https://sigmaai-backend.onrender.com/api/chat", options);
+      const response = await fetch("https://sigmaai-0qcu.onrender.com/api/chat", options);
       const res = await response.json();
       console.log(res);
       setReply(res.reply);

@@ -13,7 +13,7 @@ function Signup() {
     e.preventDefault();
 
     try {
-      const response = await fetch("https://sigmaai-backend.onrender.com/api/auth/signup", {
+      const response = await fetch("https://sigmaai-0qcu.onrender.com/api/auth/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
