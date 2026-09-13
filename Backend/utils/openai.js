@@ -6,20 +6,31 @@ const ai = new GoogleGenAI({
 });
 
 const getOpenAIAPIResponse = async (chatHistory) => {
-  try {
-    const response = await ai.models.generateContent({
-      model: "gemini-2.5-flash",
-      contents: chatHistory.map((msg) => ({
-        role: msg.role === "assistant" ? "model" : "user",
-        parts: [{ text: msg.content }],
-      })),
-    });
+  const maxRetries = 3;
 
-    return response.text;
-  } catch (err) {
-    console.error("Gemini Error:", err);
-    throw err;
+  for (let attempt = 1; attempt <= maxRetries; attempt++) {
+    try {
+      const response = await ai.models.generateContent({
+        model: "gemini-2.5-flash",
+        contents: chatHistory.map((msg) => ({
+          role: msg.role === "assistant" ? "model" : "user",
+          parts: [{ text: msg.content }],
+        })),
+      });
+
+      return response.text;
+    } catch (err) {
+      console.error(`Gemini Error - Attempt ${attempt}:`, err);
+
+      if (attempt === maxRetries) {
+        throw err;
+      }
+
+      // Wait before retrying
+      await new Promise((resolve) => setTimeout(resolve, 2000 * attempt));
+    }
   }
 };
 
 export default getOpenAIAPIResponse;
+
